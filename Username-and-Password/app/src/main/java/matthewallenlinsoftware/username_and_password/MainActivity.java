@@ -1,12 +1,24 @@
 package matthewallenlinsoftware.username_and_password;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    public void logIn(View view) {
+        EditText username = (EditText) findViewById(R.id.username);
+        EditText password = (EditText) findViewById(R.id.password);
+
+        Log.i("Username", username.getText().toString());
+
+        Log.i("Password", password.getText().toString());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
