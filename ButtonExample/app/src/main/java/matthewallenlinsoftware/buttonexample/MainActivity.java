@@ -10,6 +10,10 @@ import android.view.View;
 
 public class MainActivity extends ActionBarActivity {
 
+    public void buttonClicked(View view) {
+        String name = "Matthew";
+        Log.i("Info", "Hello there, " + name);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
