@@ -7,15 +7,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
 
     public void logIn(View view) {
-        EditText username = (EditText) findViewById(R.id.username);
+
+        //Used to display messages
+        Toast.makeText(getApplicationContext(), "Hi Matthew!", Toast.LENGTH_SHORT).show();
+
+        //EditText username = (EditText) findViewById(R.id.username);
         EditText password = (EditText) findViewById(R.id.password);
 
-        Log.i("Username", username.getText().toString());
+        //Log.i("Username", username.getText().toString());
 
         Log.i("Password", password.getText().toString());
     }
