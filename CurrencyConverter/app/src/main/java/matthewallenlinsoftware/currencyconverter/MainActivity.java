@@ -2,7 +2,6 @@ package matthewallenlinsoftware.currencyconverter;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +19,11 @@ public class MainActivity extends ActionBarActivity {
 
         Double poundAmount = dollarAmount * 0.65;
 
-        Log.i("dollarField", poundAmount.toString());
+        //Optional logging as a sanity check
+        /*Log.i("poundAmount", poundAmount.toString());*/
 
-//        Toast();
+        //Shows information to the user (set application context)
+        Toast.makeText(getApplicationContext(), "€" + poundAmount.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
