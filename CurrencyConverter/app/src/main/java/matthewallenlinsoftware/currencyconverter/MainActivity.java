@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -14,7 +15,14 @@ public class MainActivity extends ActionBarActivity {
     public void convert(View view) {
         EditText dollarField = (EditText) findViewById(R.id.dollarField);
 
-        Log.i("dollarField", dollarField.getText().toString());
+        //Take dollar field value, convert to string, then convert to a double
+        Double dollarAmount = Double.parseDouble(dollarField.getText().toString());
+
+        Double poundAmount = dollarAmount * 0.65;
+
+        Log.i("dollarField", poundAmount.toString());
+
+//        Toast();
     }
 
     @Override
