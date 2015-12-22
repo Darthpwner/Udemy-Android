@@ -22,6 +22,8 @@ public class MainActivity extends ActionBarActivity {
         //translation is a movement
        // bart.animate().translationYBy(1000f).setDuration(2000);
         bart.animate().translationXBy(1000f).setDuration(2000);
+
+        bart.animate().rotation(1800f).setDuration(2000);
     }
 
     @Override
