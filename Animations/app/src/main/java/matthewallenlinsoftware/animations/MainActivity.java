@@ -23,7 +23,9 @@ public class MainActivity extends ActionBarActivity {
        // bart.animate().translationYBy(1000f).setDuration(2000);
         bart.animate().translationXBy(1000f).setDuration(2000);
 
-        bart.animate().rotation(1800f).setDuration(2000);
+        bart.animate().rotation(1000000000f).setDuration(2000);
+
+        bart.animate().scaleX(0.5f).scaleY(0.5f).setDuration(2000);
     }
 
     @Override
