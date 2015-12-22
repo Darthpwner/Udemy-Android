@@ -16,14 +16,22 @@ public class MainActivity extends ActionBarActivity {
 
 
         //alpha(0): invisible, alpha(1): completely visible
-        bart.animate().alpha(0f).setDuration(2000); //Tell the compiler how long you want it to change
-        homer.animate().alpha(1f).setDuration(2000);
+//        bart.animate().alpha(0f).setDuration(2000); //Tell the compiler how long you want it to change
+//        homer.animate().alpha(1f).setDuration(2000);
+
+        //translation is a movement
+       // bart.animate().translationYBy(1000f).setDuration(2000);
+        bart.animate().translationXBy(1000f).setDuration(2000);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ImageView bart = (ImageView) findViewById(R.id.bart);
+
+        bart.setTranslationX(-1000f);
     }
 
     @Override
