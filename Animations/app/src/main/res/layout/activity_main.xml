@@ -14,4 +14,18 @@
         android:layout_marginTop="145dp"
         android:src="@drawable/bart"
         android:onClick="fade" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/homer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/homer"
+        android:onClick="fade"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:alpha="0"
+        android:adjustViewBounds="false" />
 </RelativeLayout>

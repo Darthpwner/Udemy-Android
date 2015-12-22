@@ -12,9 +12,12 @@ public class MainActivity extends ActionBarActivity {
 
     public void fade(View view) {
         ImageView bart = (ImageView) findViewById(R.id.bart);
+        ImageView homer = (ImageView) findViewById(R.id.homer);
+
 
         //alpha(0): invisible, alpha(1): completely visible
         bart.animate().alpha(0f).setDuration(2000); //Tell the compiler how long you want it to change
+        homer.animate().alpha(1f).setDuration(2000);
     }
 
     @Override
