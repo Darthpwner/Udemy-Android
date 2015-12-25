@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/MyFirstAndroidApp 2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/MyFirstAndroidApp 2/app/build/intermediates/pre-dexed/debug/classes-d2c93dcb8ab2d3ea0d74caf79126ff712e464047.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/AndroidStudioProjects/MyFirstAndroidApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/robpercival/AndroidStudioProjects/MyFirstAndroidApp/app/build/intermediates/pre-dexed/debug/classes-fc5546958137abdaa06f7ccfb50e07e86e1ac4ab.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/robpercival/AndroidStudioProjects/MyFirstAndroidApp/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-5a21df1bb914c2c5c326c3631860cb3f7a0cdd7b.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/MyFirstAndroidApp 2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/MyFirstAndroidApp 2/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-42ef12e3677a1e1189e8aa55c6cc495ffdb45028.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/Documents/Android/Apps/MyFirstAndroidApp 2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/robpercival/Documents/Android/Apps/MyFirstAndroidApp 2/app/build/intermediates/pre-dexed/debug/classes-a8f57a056857a58d6ca7e7779390ef705b73691a.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/AndroidStudioProjects/MyFirstAndroidApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/robpercival/AndroidStudioProjects/MyFirstAndroidApp/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-487e5db08df03d22e84f51b92a4247cfe66891ac.jar" />
+    </item>
+    <item
+        jar="/Users/robpercival/AndroidStudioProjects/MyFirstAndroidApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/robpercival/AndroidStudioProjects/MyFirstAndroidApp/app/build/intermediates/pre-dexed/debug/classes-3871f8a0953d496a32425ae3dc838197f7ae9341.jar" />
+    </item>
+
+</items>
