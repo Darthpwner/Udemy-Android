@@ -125,7 +125,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Correct!"
         android:id="@+id/resultTextView"
         android:layout_below="@+id/startButton"
         android:layout_centerHorizontal="true"

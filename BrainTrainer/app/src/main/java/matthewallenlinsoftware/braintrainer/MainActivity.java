@@ -2,7 +2,6 @@ package matthewallenlinsoftware.braintrainer;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,13 +15,18 @@ import java.util.Random;
 public class MainActivity extends ActionBarActivity {
 
     Button startButton;
+    TextView resultTextView;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
+    int score = 0;
 
     public void chooseAnswer(View view) {
         //Use tag to tell which button has been tapped
         if (view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))) {
-            Log.i("correct", "correct");
+            score++;
+            resultTextView.setText("Correct!");
+        } else {
+            resultTextView.setText("Incorrect!");
         }
     }
 
@@ -42,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
         Button button1 = (Button) findViewById(R.id.button1);
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
+        resultTextView = (TextView) findViewById(R.id.resultTextView);
 
         Random rand = new Random();
 
