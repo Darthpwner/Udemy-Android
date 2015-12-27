@@ -16,9 +16,11 @@ public class MainActivity extends ActionBarActivity {
 
     Button startButton;
     TextView resultTextView;
+    TextView pointsTextView;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
     int score = 0;
+    int numberOfQuestions = 0;
 
     public void chooseAnswer(View view) {
         //Use tag to tell which button has been tapped
@@ -28,6 +30,10 @@ public class MainActivity extends ActionBarActivity {
         } else {
             resultTextView.setText("Incorrect!");
         }
+
+        numberOfQuestions++;
+        pointsTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+
     }
 
     public void start(View view) {
@@ -47,6 +53,7 @@ public class MainActivity extends ActionBarActivity {
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
         resultTextView = (TextView) findViewById(R.id.resultTextView);
+        pointsTextView = (TextView) findViewById(R.id.pointsTextView);
 
         Random rand = new Random();
 
