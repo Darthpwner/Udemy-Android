@@ -130,5 +130,15 @@
         android:layout_centerHorizontal="true"
         android:textSize="40sp"
         android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="{;ay Again"
+        android:id="@+id/playAgainButton"
+        android:layout_alignTop="@+id/resultTextView"
+        android:layout_centerHorizontal="true"
+        android:onClick="playAgain"
+        android:visibility="invisible" />
 </RelativeLayout>
 <!-- From: file:/Users/Darthpwner/Desktop/Udemy-Android/BrainTrainer/app/src/main/res/layout/activity_main.xml -->

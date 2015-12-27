@@ -30,6 +30,29 @@ public class MainActivity extends ActionBarActivity {
 
     TextView sumTextView;
     TextView timerTextView;
+    Button playAgainButton;
+
+    public void playAgain(View view) {
+        score = 0;
+        numberOfQuestions = 0;
+
+        timerTextView.setText("30s");
+        pointsTextView.setText("0/0");
+        resultTextView.setText("");
+        playAgainButton.setVisibility(View.INVISIBLE);
+
+        new CountDownTimer(3100, 1000) {
+            public void onTick(long millisecondsUntilDone) {    //This method will give us a variable to use
+                timerTextView.setText(String.valueOf(millisecondsUntilDone/1000) + "s");
+            }
+
+            public void onFinish() {
+                playAgainButton.setVisibility(View.VISIBLE);
+                timerTextView.setText("0s");
+                resultTextView.setText("Your score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+            }
+        }.start();
+    }
 
     public void generateQuestion() {
         Random rand = new Random();
@@ -77,18 +100,6 @@ public class MainActivity extends ActionBarActivity {
         numberOfQuestions++;
         pointsTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
         timerTextView = (TextView) findViewById(R.id.timerTextView);
-
-        generateQuestion();
-
-        new CountDownTimer(3100, 1000) {
-            public void onTick(long millisecondsUntilDone) {    //This method will give us a variable to use
-                timerTextView.setText(String.valueOf(millisecondsUntilDone/1000) + "s");
-            }
-
-            public void onFinish() {
-                resultTextView.setText("Done");
-            }
-        }.start();
     }
 
     public void start(View view) {
@@ -109,6 +120,10 @@ public class MainActivity extends ActionBarActivity {
         button3 = (Button) findViewById(R.id.button3);
         resultTextView = (TextView) findViewById(R.id.resultTextView);
         pointsTextView = (TextView) findViewById(R.id.pointsTextView);
+        playAgainButton = (Button) findViewById(R.id.playAgainButton);
+
+        generateQuestion();
+        playAgain();
     }
 
     @Override
