@@ -59,7 +59,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:id="@+id/gridLayout">
 
         <Button
             android:layout_width="wrap_content"
@@ -126,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/resultTextView"
-        android:layout_below="@+id/startButton"
+        android:layout_below="@+id/gridLayout"
         android:layout_centerHorizontal="true"
         android:textSize="40sp"
         android:layout_marginTop="20dp" />
@@ -140,5 +141,9 @@
         android:layout_centerHorizontal="true"
         android:onClick="playAgain"
         android:visibility="invisible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
 </RelativeLayout>
 <!-- From: file:/Users/Darthpwner/Desktop/Udemy-Android/BrainTrainer/app/src/main/res/layout/activity_main.xml -->

@@ -14,9 +14,6 @@
       </layout>
     </layouts>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="5674869a-dafb-4b51-84a8-bb6305fcf37b" name="Default" comment="" />
     <ignored path="Timer Demo.iws" />

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
     TextView sumTextView;
     TextView timerTextView;
     Button playAgainButton;
+    RelativeLayout gameRelativeLayout;
 
     public void playAgain(View view) {
         score = 0;
@@ -41,9 +43,9 @@ public class MainActivity extends ActionBarActivity {
         resultTextView.setText("");
         playAgainButton.setVisibility(View.INVISIBLE);
 
-        new CountDownTimer(3100, 1000) {
+        new CountDownTimer(30100, 1000) {
             public void onTick(long millisecondsUntilDone) {    //This method will give us a variable to use
-                timerTextView.setText(String.valueOf(millisecondsUntilDone/1000) + "s");
+                timerTextView.setText(String.valueOf(millisecondsUntilDone / 1000) + "s");
             }
 
             public void onFinish() {
@@ -104,6 +106,9 @@ public class MainActivity extends ActionBarActivity {
 
     public void start(View view) {
         startButton.setVisibility(View.INVISIBLE);
+        gameRelativeLayout.setVisibility(RelativeLayout.VISIBLE);
+
+        playAgain(findViewById(R.id.playAgainButton));
     }
 
     @Override
@@ -121,6 +126,7 @@ public class MainActivity extends ActionBarActivity {
         resultTextView = (TextView) findViewById(R.id.resultTextView);
         pointsTextView = (TextView) findViewById(R.id.pointsTextView);
         playAgainButton = (Button) findViewById(R.id.playAgainButton);
+        gameRelativeLayout = (RelativeLayout) findViewById(R.id.gameRelativeLayout);
 
         playAgain(findViewById(R.id.playAgainButton));    //Need to send a View (it can be anything)
     }
