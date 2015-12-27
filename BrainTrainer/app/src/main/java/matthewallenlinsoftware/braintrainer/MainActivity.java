@@ -39,6 +39,8 @@ public class MainActivity extends ActionBarActivity {
 
         locationOfCorrectAnswer = rand.nextInt(4);
 
+        answers.clear();    //Clears ArrayList each time
+
         int incorrectAnswer;    //Used to prevent duplicate correct answers
 
         for(int i = 0; i < 4; i++) {
