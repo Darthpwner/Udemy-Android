@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/Darthpwner/Desktop/Udemy-Android/ShowingandHidingUIElements/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/Darthpwner/Desktop/Udemy-Android/ShowingandHidingUIElements/app/build/intermediates/pre-dexed/debug/classes-0a2ffff7846c20bae163133d1c62b11393829645.jar" />
+    </item>
+    <item
+        jar="/Users/Darthpwner/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/Darthpwner/Desktop/Udemy-Android/ShowingandHidingUIElements/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-f494bf6fbaa0753a71d5450836523518be355876.jar" />
+    </item>
+    <item
+        jar="/Users/Darthpwner/Desktop/Udemy-Android/ShowingandHidingUIElements/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/Darthpwner/Desktop/Udemy-Android/ShowingandHidingUIElements/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-a42262b5df8512da7e9815f57abd4c595a3c9a49.jar" />
+    </item>
+    <item
+        jar="/Users/Darthpwner/Desktop/Udemy-Android/ShowingandHidingUIElements/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/Darthpwner/Desktop/Udemy-Android/ShowingandHidingUIElements/app/build/intermediates/pre-dexed/debug/classes-8a9be0a04b8c7ccf09d8297bcd579479a9a349b9.jar" />
+    </item>
+
+</items>

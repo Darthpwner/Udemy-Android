@@ -1,18 +1,32 @@
 package matthewallenlinsoftware.showingandhidinguielements;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    TextView textView;
+
+    public void show(View view) {
+        textView.setVisibility(View.VISIBLE);
+    }
+
+    public void hide(View view) {
+        textView.setVisibility(View.INVISIBLE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
+
+        textView = (TextView) findViewById(R.id.textView);
+     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
