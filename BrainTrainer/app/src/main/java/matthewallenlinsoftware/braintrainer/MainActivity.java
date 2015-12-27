@@ -122,7 +122,6 @@ public class MainActivity extends ActionBarActivity {
         pointsTextView = (TextView) findViewById(R.id.pointsTextView);
         playAgainButton = (Button) findViewById(R.id.playAgainButton);
 
-        generateQuestion();
         playAgain(findViewById(R.id.playAgainButton));    //Need to send a View (it can be anything)
     }
 

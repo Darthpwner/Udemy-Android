@@ -48,8 +48,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/matthewallenlinsoftware/braintrainer/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67058825">
-              <caret line="131" column="58" selection-start-line="131" selection-start-column="58" selection-end-line="131" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.49411765">
+              <caret line="60" column="62" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
               <folding>
                 <element signature="e#539#548#0" expanded="true" />
                 <element signature="e#3406#3407#0" expanded="true" />
@@ -1370,8 +1370,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="394" />
-    <option name="y" value="23" />
+    <option name="x" value="512" />
+    <option name="y" value="32" />
     <option name="width" value="1116" />
     <option name="height" value="831" />
   </component>
@@ -1611,7 +1611,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="394" y="23" width="1116" height="831" extended-state="0" />
+    <frame x="512" y="32" width="1116" height="831" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1674,8 +1674,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/matthewallenlinsoftware/braintrainer/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67058825">
-          <caret line="131" column="58" selection-start-line="131" selection-start-column="58" selection-end-line="131" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.49411765">
+          <caret line="60" column="62" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
           <folding>
             <element signature="e#539#548#0" expanded="true" />
             <element signature="e#3406#3407#0" expanded="true" />
