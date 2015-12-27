@@ -14,6 +14,9 @@
       </layout>
     </layouts>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="56313b41-7fb8-4b3c-9d31-e7653ff1be4c" name="Default" comment="" />
     <ignored path="Showing and Hiding UI Elements.iws" />
