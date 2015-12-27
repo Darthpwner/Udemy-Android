@@ -2,6 +2,7 @@ package matthewallenlinsoftware.braintrainer;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,13 @@ public class MainActivity extends ActionBarActivity {
     Button startButton;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
+
+    public void chooseAnswer(View view) {
+        //Use tag to tell which button has been tapped
+        if (view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))) {
+            Log.i("correct", "correct");
+        }
+    }
 
     public void start(View view) {
         startButton.setVisibility(View.INVISIBLE);
