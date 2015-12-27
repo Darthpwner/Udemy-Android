@@ -14,5 +14,48 @@
         android:layout_centerHorizontal="true"
         android:textSize="80sp"
         android:padding="40dp"
-        android:backgroundTint="#ff3cff4c" />
+        android:backgroundTint="#ff3cff4c"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30s"
+        android:id="@+id/timerTextView"
+        android:textSize="30sp"
+        android:background="#fffdff11"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/startButton"
+        android:layout_toStartOf="@+id/startButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0/0"
+        android:id="@+id/pointsTextView"
+        android:layout_alignBottom="@+id/timerTextView"
+        android:layout_toRightOf="@+id/startButton"
+        android:layout_toEndOf="@+id/startButton"
+        android:textSize="30sp"
+        android:padding="10dp"
+        android:background="#ffff9d12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="31 + 12"
+        android:id="@+id/sumtTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:padding="15dp"
+        android:textColor="#ff121212" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sumtTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></GridLayout>
 </RelativeLayout>
