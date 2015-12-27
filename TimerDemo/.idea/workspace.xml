@@ -48,8 +48,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/matthewallenlinsoftware/timerdemo/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8340708">
-              <caret line="41" column="71" selection-start-line="41" selection-start-column="71" selection-end-line="41" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.9004425">
+              <caret line="43" column="18" selection-start-line="32" selection-start-column="7" selection-end-line="43" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1362,8 +1362,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1009" />
-    <option name="y" value="40" />
+    <option name="x" value="722" />
+    <option name="y" value="23" />
     <option name="width" value="1116" />
     <option name="height" value="831" />
   </component>
@@ -1603,7 +1603,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1009" y="40" width="1116" height="831" extended-state="0" />
+    <frame x="722" y="23" width="1116" height="831" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1655,8 +1655,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/matthewallenlinsoftware/timerdemo/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8340708">
-          <caret line="41" column="71" selection-start-line="41" selection-start-column="71" selection-end-line="41" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.9004425">
+          <caret line="43" column="18" selection-start-line="32" selection-start-column="7" selection-end-line="43" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

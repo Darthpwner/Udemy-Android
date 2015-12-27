@@ -1,6 +1,7 @@
 package matthewallenlinsoftware.braintrainer;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
     Button button3;
 
     TextView sumTextView;
+    TextView timerTextView;
 
     public void generateQuestion() {
         Random rand = new Random();
@@ -74,7 +76,19 @@ public class MainActivity extends ActionBarActivity {
 
         numberOfQuestions++;
         pointsTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+        timerTextView = (TextView) findViewById(R.id.timerTextView);
+
         generateQuestion();
+
+        new CountDownTimer(3100, 1000) {
+            public void onTick(long millisecondsUntilDone) {    //This method will give us a variable to use
+                timerTextView.setText(String.valueOf(millisecondsUntilDone/1000) + "s");
+            }
+
+            public void onFinish() {
+                resultTextView.setText("Done");
+            }
+        }.start();
     }
 
     public void start(View view) {
