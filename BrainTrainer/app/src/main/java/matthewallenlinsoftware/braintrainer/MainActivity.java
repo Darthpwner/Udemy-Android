@@ -123,7 +123,7 @@ public class MainActivity extends ActionBarActivity {
         playAgainButton = (Button) findViewById(R.id.playAgainButton);
 
         generateQuestion();
-        playAgain();
+        playAgain(findViewById(R.id.playAgainButton));    //Need to send a View (it can be anything)
     }
 
     @Override
