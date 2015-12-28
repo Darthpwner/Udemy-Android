@@ -24,13 +24,45 @@
             android:layout_column="0" />
 
         <Button
-            android:layout_width="wrap_conent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="0"
-            android:text="New Button"
-            android:id="@+id/button" />
-            
+            android:tag="0"
+            android:text=""
+            android:id="@+id/button"
+            android:onClick="celebChosen" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:tag="1"
+            android:text=""
+            android:id="@+id/button2"
+            android:onClick="celebChosen" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:tag="2"
+            android:text=""
+            android:id="@+id/button3"
+            android:onClick="celebChosen" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:tag="0"
+            android:text=""
+            android:id="@+id/button4"
+            android:onClick="celebChosen" />
+
     </GridLayout>
 
 </RelativeLayout>
