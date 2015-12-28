@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.robpercival.downloadingwebcontent" >
+    package="matthewallenlinsoftware.downloadingwebcontent" >
 
+    <!-- Shows up in Google Play Store, good idea to show why you use Internet-->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
