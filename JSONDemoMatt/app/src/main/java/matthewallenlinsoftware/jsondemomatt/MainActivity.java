@@ -3,6 +3,7 @@ package matthewallenlinsoftware.jsondemomatt;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,6 +21,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DownloadTask task = new DownloadTask();
+        task.execute("http://api.openweathermap.org/data/2.5/weather?q=London,uk");
     }
 
     //Allows you to run a task on the background thread
@@ -56,8 +60,15 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return null;
+        }
+
+        //Method that is called when the doInBackground method has completed
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Log.i("Website content", result);
         }
     }
 
