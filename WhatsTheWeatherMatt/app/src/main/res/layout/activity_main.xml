@@ -46,11 +46,10 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/resultTextView"
         android:layout_alignBottom="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="120dp"
         android:textSize="20sp"
-        android:text="Hello World"
         android:textColor="#f5f1f5f9" />
 </RelativeLayout>

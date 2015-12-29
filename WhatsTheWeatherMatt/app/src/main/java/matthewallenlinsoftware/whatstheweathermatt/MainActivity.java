@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +25,7 @@ import java.net.URL;
 public class MainActivity extends ActionBarActivity {
 
     EditText cityName;
+    TextView resultTextView;
 
     public void findWeather(View view) {
         Log.i("cityName", cityName.getText().toString());
@@ -35,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         cityName = (EditText) findViewById(R.id.cityName);
+        resultTextView = (TextView) findViewById(R.id.resultTextView);
     }
 
     public class DownloadTask extends AsyncTask<String, Void, String> {
@@ -84,6 +87,8 @@ public class MainActivity extends ActionBarActivity {
 
             try {
 
+                String message = "";
+
                 JSONObject jsonObject = new JSONObject(result);
 
                 String weatherInfo = jsonObject.getString("weather");
@@ -96,11 +101,20 @@ public class MainActivity extends ActionBarActivity {
 
                     JSONObject jsonPart = arr.getJSONObject(i);
 
-                    Log.i("main", jsonPart.getString("main"));
-                    Log.i("description", jsonPart.getString("description"));
+                    String main = "";
+                    String description = "";
 
+                    main = jsonPart.getString("main");
+                    description = jsonPart.getString("description");
+
+                    if(main != "" && description != "") {
+                        message += main + ": " + description + "\r\n";
+                    }
                 }
 
+                if(message != "") {
+                    resultTextView.setText(message);
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
