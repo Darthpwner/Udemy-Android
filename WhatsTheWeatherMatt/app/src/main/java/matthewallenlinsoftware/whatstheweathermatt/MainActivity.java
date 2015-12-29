@@ -1,5 +1,6 @@
 package matthewallenlinsoftware.whatstheweathermatt;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,6 +31,12 @@ public class MainActivity extends ActionBarActivity {
 
     public void findWeather(View view) {
         Log.i("cityName", cityName.getText().toString());
+
+        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(cityName.getWindowToken(), 0);  //Hides the keyboard
+
+        DownloadTask task = new DownloadTask();
+        task.execute("http://api.openweathermap.org/data/2.5/weather?q=" + cityName.getText().toString());
     }
 
     @Override
