@@ -5,9 +5,9 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +27,8 @@ public class MainActivity extends ActionBarActivity {
     ArrayList<String> celebURLs = new ArrayList<String>();
     ArrayList<String> celebNames = new ArrayList<String>();
     int chosenCeleb = 0;
+
+    ImageView imageView;
 
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
@@ -95,6 +97,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        imageView = (ImageView) findViewById(R.id.imageView);
+
         DownloadTask task = new DownloadTask();
         String result = null;
 
@@ -120,7 +124,15 @@ public class MainActivity extends ActionBarActivity {
             Random random = new Random();
             chosenCeleb = random.nextInt(celebURLs.size());
 
-            Log.i("Contents of URL", result);
+           ImageDownloader imageTask = new ImageDownloader();
+
+            Bitmap celebImage;
+
+            celebImage = imageTask.execute(celebURLs.get(chosenCeleb)).get();
+
+            imageView.setImageBitmap(celebImage);
+
+
         } catch(InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
