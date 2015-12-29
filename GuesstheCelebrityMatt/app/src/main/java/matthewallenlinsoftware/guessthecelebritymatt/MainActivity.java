@@ -105,6 +105,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         imageView = (ImageView) findViewById(R.id.imageView);
+        button0 = (Button) findViewById(R.id.button);
+        button1 = (Button) findViewById(R.id.button2);
+        button2 = (Button) findViewById(R.id.button3);
+        button3 = (Button) findViewById(R.id.button4);
 
         DownloadTask task = new DownloadTask();
         String result = null;
@@ -114,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
 
             String[] splitResult = result.split("<div class=\"sidebarContainer\">");
 
-            Pattern p = Pattern.compile("src=\"(.*?)\"");
+            Pattern p = Pattern.compile("<img src=\"(.*?)\"");
             Matcher m = p.matcher(splitResult[0]);
 
             while(m.find()) {
@@ -156,6 +160,10 @@ public class MainActivity extends ActionBarActivity {
                     answers[i] = celebNames.get(incorrectAnswerLocation);
                 }
             }
+            button0.setText(answers[0]);
+            button1.setText(answers[1]);
+            button2.setText(answers[2]);
+            button3.setText(answers[3]);
 
         } catch(InterruptedException e) {
             e.printStackTrace();
