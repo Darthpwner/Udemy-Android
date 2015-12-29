@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +38,14 @@ public class MainActivity extends ActionBarActivity {
     Button button1;
     Button button2;
     Button button3;
+
+    public void celebChosen(View view) {
+        if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))) {
+            Toast.makeText(getApplicationContext(), "Correct!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Wrong! It was " + celebNames.get(chosenCeleb), Toast.LENGTH_LONG).show();
+        }
+    }
 
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
