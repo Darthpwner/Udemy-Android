@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -27,8 +28,14 @@ public class MainActivity extends ActionBarActivity {
     ArrayList<String> celebURLs = new ArrayList<String>();
     ArrayList<String> celebNames = new ArrayList<String>();
     int chosenCeleb = 0;
+    int locationOfCorrectAnswer = 0;    //Should range from 0 to 3
+    String[] answers = new String[4];
 
     ImageView imageView;
+    Button button0;
+    Button button1;
+    Button button2;
+    Button button3;
 
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
@@ -124,7 +131,7 @@ public class MainActivity extends ActionBarActivity {
             Random random = new Random();
             chosenCeleb = random.nextInt(celebURLs.size());
 
-           ImageDownloader imageTask = new ImageDownloader();
+            ImageDownloader imageTask = new ImageDownloader();
 
             Bitmap celebImage;
 
@@ -132,6 +139,23 @@ public class MainActivity extends ActionBarActivity {
 
             imageView.setImageBitmap(celebImage);
 
+            locationOfCorrectAnswer = random.nextInt(4);
+
+            int incorrectAnswerLocation;
+
+            for(int i = 0; i < 4; i++) {
+                if(i == locationOfCorrectAnswer) {
+                    answers[i] = celebNames.get(chosenCeleb);
+                } else {
+                    incorrectAnswerLocation = random.nextInt(celebURLs.size());
+
+                    while(incorrectAnswerLocation == chosenCeleb) {
+                        incorrectAnswerLocation = random.nextInt(celebURLs.size());
+                    }
+
+                    answers[i] = celebNames.get(incorrectAnswerLocation);
+                }
+            }
 
         } catch(InterruptedException e) {
             e.printStackTrace();
