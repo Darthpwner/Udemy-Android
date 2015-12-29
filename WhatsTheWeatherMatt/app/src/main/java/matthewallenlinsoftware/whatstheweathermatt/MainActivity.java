@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,9 +20,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -35,8 +38,17 @@ public class MainActivity extends ActionBarActivity {
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(cityName.getWindowToken(), 0);  //Hides the keyboard
 
-        DownloadTask task = new DownloadTask();
-        task.execute("http://api.openweathermap.org/data/2.5/weather?q=" + cityName.getText().toString());
+        //Encode multiple word cities as a URL
+        try {
+            String encodedCityName = URLEncoder.encode(cityName.getText().toString(), "UTF-8");
+
+            DownloadTask task = new DownloadTask();
+            task.execute("http://api.openweathermap.org/data/2.5/weather?q=" + encodedCityName);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+
+            Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
+        }
     }
 
     @Override
@@ -122,10 +134,14 @@ public class MainActivity extends ActionBarActivity {
 
                 if(message != "") {
                     resultTextView.setText(message);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
+
+                Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG);
             }
 
 
