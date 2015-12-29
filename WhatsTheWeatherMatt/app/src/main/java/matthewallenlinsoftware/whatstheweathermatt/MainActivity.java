@@ -1,11 +1,13 @@
 package matthewallenlinsoftware.whatstheweathermatt;
 
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,10 +23,18 @@ import java.net.URL;
 
 public class MainActivity extends ActionBarActivity {
 
+    EditText cityName;
+
+    public void findWeather(View view) {
+        Log.i("cityName", cityName.getText().toString());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        cityName = (EditText) findViewById(R.id.cityName);
     }
 
     public class DownloadTask extends AsyncTask<String, Void, String> {

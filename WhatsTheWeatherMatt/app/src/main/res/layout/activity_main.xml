@@ -29,7 +29,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/cityName"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="What&apos;s the Weather?"
         android:id="@+id/button"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/cityName"
         android:layout_centerHorizontal="true"
         android:onClick="findWeather"
         android:layout_marginTop="10dp" />
