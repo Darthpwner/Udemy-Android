@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -59,7 +60,11 @@ public class MapsActivity extends FragmentActivity {
 
 
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(27.175306, 78.042144)).title("Taj Mahal"));
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); //Can add satellite features on phone
+
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.175306, 78.042144)).title("Taj Mahal")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+        //Change color of the marker to yellow
 
         //Use any number between 2 and 21 (2 is max zoom out, 21 is max zoom in)
         //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
