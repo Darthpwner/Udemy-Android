@@ -7,14 +7,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity, LocationListener {
+public class MapsActivity extends FragmentActivity implements LocationListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
@@ -30,6 +30,12 @@ public class MapsActivity extends FragmentActivity, LocationListener {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         provider = locationManager.getBestProvider(new Criteria(), false);
+
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        if(location != null) {
+            onLocationChanged(location);
+        }
     }
 
     @Override
@@ -53,17 +59,18 @@ public class MapsActivity extends FragmentActivity, LocationListener {
         }
     }
 
-    private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-    }
+    private void setUpMap() {}
 
     @Override
     public void onLocationChanged(Location location) {
         Double lat = location.getLatitude();
         Double lng = location.getLongitude();
 
-        Log.i("Latitude", lat.toString());
-       // Log.i("Longitude", lng.toString());
+        mMap.clear();   //Clears any markers previously on the map
+
+        mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Your location"));
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
     }
 
     @Override
