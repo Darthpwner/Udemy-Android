@@ -1,4 +1,4 @@
-package matthewallenlinsoftware.mapsdemomatt;
+package com.example.robpercival.mapsdemo;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -19,9 +19,6 @@ public class MapsActivity extends FragmentActivity {
         setUpMapIfNeeded();
     }
 
-    /*This is run if the app is put into the background and
-      brought to the front again
-    */
     @Override
     protected void onResume() {
         super.onResume();
@@ -48,7 +45,7 @@ public class MapsActivity extends FragmentActivity {
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();  //Analagous to what findViewById does
+                    .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -62,8 +59,6 @@ public class MapsActivity extends FragmentActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-
-    //Creates a new marker at (0, 0) with the title of Marker
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
