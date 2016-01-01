@@ -1,7 +1,7 @@
 package matthewallenlinsoftware.mapsdemomatt;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -69,6 +69,8 @@ public class MapsActivity extends FragmentActivity {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
         //Use any number between 2 and 21 (2 is max zoom out, 21 is max zoom in)
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(27.175306, 78.042144), 15));
     }
 }
