@@ -57,16 +57,9 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
 
-    //Creates a new marker at (0, 0) with the title of Marker
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27.175306, 78.042144)).title("Taj Mahal"));
 
         //Use any number between 2 and 21 (2 is max zoom out, 21 is max zoom in)
         //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
