@@ -3,6 +3,7 @@ package com.example.robpercival.mapsdemo;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -61,5 +62,10 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+        //Use any number between 2 and 21 (2 is max zoom out, 21 is max zoom in)
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+
+        //Do not zoom in too much or you won't be able to get a full picture of the place
     }
 }
