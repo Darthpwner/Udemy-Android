@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 //Allows our class to use all the methods in LocationListener
 public class MainActivity extends Activity implements LocationListener {
@@ -85,8 +86,8 @@ public class MainActivity extends Activity implements LocationListener {
         Double lat = location.getLatitude();    //Gets the user's latitude on the map
         Double lng = location.getLongitude();   //Gets the user's longitude on the map
 
-        Log.i("Latitude", lat.toString());
-        Log.i("Longitude", lng.toString());
+        Log.i("Location info: Lat", lat.toString());
+        Log.i("Location info: Lng", lng.toString());
     }
 
     //Called when the user's location becomes available after it hasn't been for a while
@@ -105,5 +106,11 @@ public class MainActivity extends Activity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void getLocation(View view) {
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        onLocationChanged(location);
     }
 }
