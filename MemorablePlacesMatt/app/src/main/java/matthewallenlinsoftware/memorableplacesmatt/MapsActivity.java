@@ -1,12 +1,15 @@
 package matthewallenlinsoftware.memorableplacesmatt;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +28,9 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     int location = -1;
+
+    LocationManager locationManager;
+    String provider;
 
     @Override
     public void onMapLongClick(LatLng point) {
@@ -47,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
         MainActivity.locations.add(point);
 
         mMap.addMarker(new MarkerOptions()
-            .position(point)
+                .position(point)
                 .title("You are here")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
     }
@@ -56,7 +62,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        setUpMapIfNeeded();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        provider = locationManager.getBestProvider(new Criteria(), false);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -71,6 +80,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+
+        if(location == -1 || location == 0) {
+            locationManager.requestLocationUpdates(provider, 400, 1, this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        locationManager.removeUpdates(this);
     }
 
     /**
@@ -110,9 +130,13 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
      */
     private void setUpMap() {
         if (location != -1 && location != 0) {  //-1 is error, 0 is adding a point
+            locationManager.removeUpdates(this);
+
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(MainActivity.locations.get(location), 10));
 
             mMap.addMarker(new MarkerOptions().position(MainActivity.locations.get(location)).title(MainActivity.places.get(location)));
+        } else {
+            locationManager.requestLocationUpdates(provider, 400, 1, this);
         }
     }
 
@@ -127,6 +151,12 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onLocationChanged(Location userLocation) {
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userLocation.getLatitude(), userLocation.getLongitude(), 10)));
+    }
+
 
     @Override
     public void onMapClick(LatLng latLng) {
