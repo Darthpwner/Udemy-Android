@@ -1,5 +1,6 @@
 package matthewallenlinsoftware.memorableplacesmatt;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -22,6 +23,7 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    int location = -1;
 
     @Override
     public void onMapLongClick(LatLng point) {
@@ -39,6 +41,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
             e.printStackTrace();
         }
 
+        MainActivity.places.add(label);
+        MainActivity.arrayAdapter.notifyDataSetChanged();
+        MainActivity.locations.add(point);
+
         mMap.addMarker(new MarkerOptions()
             .position(point)
                 .title("You are here")
@@ -51,10 +57,13 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
 
-        //ActionBar actionBar =
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
-        Log.i("locationInfo", Integer.toString(i.getIntExtra("locationInfo", -1)));
+        i.getIntExtra("locationInfo", -1);
+
+        setUpMapIfNeeded();
     }
 
     @Override
