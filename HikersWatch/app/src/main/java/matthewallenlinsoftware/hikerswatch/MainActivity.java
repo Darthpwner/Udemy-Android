@@ -24,19 +24,27 @@ public class MainActivity extends Activity implements LocationListener {
     LocationManager locationManager;
     String provider;
 
-    TextView lat;
-    TextView lng;
-    TextView accuracy;
-    TextView speed;
-    TextView bearing;
-    TextView altitude;
-    TextView address;
+    TextView latTV;
+    TextView lngTV;
+    TextView accuracyTV;
+    TextView speedTV;
+    TextView bearingTV;
+    TextView altitudeTV;
+    TextView addressTV;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        latTV = (TextView) findViewById(R.id.lat);
+        lngTV = (TextView) findViewById(R.id.lng);
+        accuracyTV = (TextView) findViewById(R.id.accuracy);
+        speedTV = (TextView) findViewById(R.id.speed);
+        bearingTV = (TextView) findViewById(R.id.bearing);
+        altitudeTV = (TextView) findViewById(R.id.altitude);
+        addressTV = (TextView) findViewById(R.id.address);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -101,6 +109,12 @@ public class MainActivity extends Activity implements LocationListener {
             e.printStackTrace();
         }
 
+        latTV.setText("Latitude: " + lat.toString());
+        lngTV.setText("Longitude: " + lng.toString());
+        altitudeTV.setText("Altitude: " + altitude.toString() + "m");
+        bearingTV.setText("Bearing: " + bearing.toString());
+        speedTV.setText("Speed: " + speed.toString() + "m/s");
+        accuracyTV.setText("Accuracy: " + accuracy.toString() + "m");
 
         Log.i("Latitude", String.valueOf(lat));
         Log.i("Longitude", String.valueOf(lng));
