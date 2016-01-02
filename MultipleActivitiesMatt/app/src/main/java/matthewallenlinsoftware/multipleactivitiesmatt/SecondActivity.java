@@ -3,10 +3,10 @@ package matthewallenlinsoftware.multipleactivitiesmatt;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class SecondActivity extends Activity {
@@ -24,8 +24,10 @@ public class SecondActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
+
         Intent i = getIntent(); //Gets Intent and we can extract data that has been passed
-        Log.i("Sent data", i.getStringExtra("hello"));
+        textView2.setText("Hello" + i.getStringExtra("name"));
     }
 
     @Override
