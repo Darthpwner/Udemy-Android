@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,6 +23,15 @@ public class MainActivity extends Activity implements LocationListener {
 
     LocationManager locationManager;
     String provider;
+
+    TextView lat;
+    TextView lng;
+    TextView accuracy;
+    TextView speed;
+    TextView bearing;
+    TextView altitude;
+    TextView address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
