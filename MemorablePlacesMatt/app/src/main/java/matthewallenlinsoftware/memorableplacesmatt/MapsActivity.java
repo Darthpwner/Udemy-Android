@@ -1,22 +1,60 @@
 package matthewallenlinsoftware.memorableplacesmatt;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity {
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+
+    @Override
+    public void onMapLongClick(LatLng point) {
+        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
+        String label = new Date().toString();
+
+        try {
+            List<Address> listAddresses = geocoder.getFromLocation(point.latitude, point.longitude, 1);
+
+            if(listAddresses != null && listAddresses.size() > 0) {
+                label = listAddresses.get(0).getAddressLine(0);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        mMap.addMarker(new MarkerOptions()
+            .position(point)
+                .title("You are here")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+
+        //ActionBar actionBar =
+
+        Intent i = getIntent();
+        Log.i("locationInfo", Integer.toString(i.getIntExtra("locationInfo", -1)));
     }
 
     @Override
@@ -46,6 +84,7 @@ public class MapsActivity extends FragmentActivity {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+            mMap.setOnMapLongClickListener(this);
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -61,5 +100,22 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+
     }
 }
