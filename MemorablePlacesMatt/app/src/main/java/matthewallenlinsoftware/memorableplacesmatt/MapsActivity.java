@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -108,7 +109,11 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        if (location != -1 && location != 0) {  //-1 is error, 0 is adding a point
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(MainActivity.locations.get(location), 10));
+
+            mMap.addMarker(new MarkerOptions().position(MainActivity.locations.get(location)).title(MainActivity.places.get(location)));
+        }
     }
 
     @Override
