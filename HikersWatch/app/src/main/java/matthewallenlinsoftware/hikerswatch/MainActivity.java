@@ -49,6 +49,10 @@ public class MainActivity extends Activity implements LocationListener {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         provider = locationManager.getBestProvider(new Criteria(), false);
+
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        onLocationChanged(location);
     }
 
     @Override
@@ -101,8 +105,15 @@ public class MainActivity extends Activity implements LocationListener {
         try {
             List<Address> listAddresses = geocoder.getFromLocation(lat, lng, 1);
 
+            String addressHolder = "";
+
             if(listAddresses != null && listAddresses.size() > 0) {
                 Log.i("PlaceInfo", listAddresses.get(0).toString());
+
+                for(int i = 0; i <= listAddresses.get(0).getMaxAddressLineIndex(); i++) {
+                    addressHolder += listAddresses.get(0).getAddressLine(i) + "\n";
+                }
+                addressTV.setText("Address:\n" + addressHolder);
             }
 
         } catch (IOException e) {
