@@ -52,8 +52,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Speed: 4.7 m/s"
-        android:id="@+id/speed"
+        android:text="Accuracy: 20.0 m"
+        android:id="@+id/accuracy"
         android:textSize="20sp"
         android:textColor="#ff120d1c"
         android:layout_below="@+id/lng"
@@ -67,7 +67,30 @@
         android:id="@+id/speed"
         android:textSize="20sp"
         android:textColor="#ff120d1c"
-        android:layout_below="@+id/lng"
+        android:layout_below="@+id/accuracy"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bearing: 086"
+        android:id="@+id/bearing"
+        android:textSize="20sp"
+        android:textColor="#ff120d1c"
+        android:layout_below="@+id/speed"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address: \n76 Fake Street"
+        android:id="@+id/address"
+        android:textSize="20sp"
+        android:textColor="#ff120d1c"
+        android:layout_below="@+id/bearing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal" />
 </RelativeLayout>
