@@ -1,7 +1,9 @@
 package matthewallenlinsoftware.notesmatt;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class MainActivity extends Activity {
@@ -24,7 +28,21 @@ public class MainActivity extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        notes.add("Example note");
+        SharedPreferences sharedPreferences = this.getSharedPreferences("matthewallenlinsoftware.notesmatt", Context.MODE_PRIVATE);
+
+        //Not necessarily ordered, but it is similar to an array
+        //Shared Preferences uses a Set
+        Set<String> set = sharedPreferences.getStringSet("notes", null);
+
+        notes.clear();
+        if(set != null) {
+            notes.addAll(set);
+        } else {
+            notes.add("Example note");
+            set = new HashSet<String>();
+            set.addAll(notes);  //Cannot add values here
+            sharedPreferences.edit().putStringSet("notes", set).apply();
+        }
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
 
@@ -55,7 +73,9 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.add) {
+            notes.add("");  //User wants to save this info permanently
+
             return true;
         }
 

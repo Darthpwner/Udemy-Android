@@ -1,14 +1,24 @@
 package matthewallenlinsoftware.notesmatt;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+import java.util.HashMap;
 
-public class EditYourNote extends Activity {
+
+public class EditYourNote extends Activity implements TextWatcher {
+
+    int noteId;
+    static ArrayAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +28,13 @@ public class EditYourNote extends Activity {
         EditText editText = (EditText) findViewById(R.id.editText);
 
         Intent i = getIntent();
-        int noteId = i.getIntExtra("noteId", -1);
+        noteId = i.getIntExtra("noteId", -1);
 
         if(noteId != -1) {
             editText.setText(MainActivity.notes.get(noteId));
+
         }
+        editText.addTextChangedListener(this);
     }
 
     @Override
@@ -45,5 +57,33 @@ public class EditYourNote extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        MainActivity.notes.set(noteId, String.valueOf(s));
+        MainActivity.arrayAdapter.notifyDataSetChanged();
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("matthewallenlinsoftware.notesmatt", Context.MODE_PRIVATE);
+
+        if(MainActivity.set == null) {
+            MainActivity.set = new HashMap<String>();
+        } else {
+            MainActivity.set.clear();
+        }
+
+        MainActivity.set.clear();
+        MainActivity.set.addAll(MainActivity.notes);
+        sharedPreferences.edit().putString("notes", set).apply();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }
