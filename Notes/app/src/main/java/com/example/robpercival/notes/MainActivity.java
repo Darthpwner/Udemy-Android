@@ -1,4 +1,4 @@
-package matthewallenlinsoftware.notesmatt;
+package com.example.robpercival.notes;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,10 +20,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static android.widget.AdapterView.*;
 
 public class MainActivity extends Activity {
 
-    static ArrayList<String> notes = new ArrayList<String>();
+    static ArrayList<String> notes = new ArrayList<>();
+    static ArrayAdapter arrayAdapter;
+    static Set<String> set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,53 +35,84 @@ public class MainActivity extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("matthewallenlinsoftware.notesmatt", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.robpercival.notes", Context.MODE_PRIVATE);
 
-        //Not necessarily ordered, but it is similar to an array
-        //Shared Preferences uses a Set
-        Set<String> set = sharedPreferences.getStringSet("notes", null);
+        set = sharedPreferences.getStringSet("notes", null);
 
         notes.clear();
-        if(set != null) {
+
+        if (set != null) {
+
             notes.addAll(set);
+
         } else {
+
             notes.add("Example note");
             set = new HashSet<String>();
-            set.addAll(notes);  //Cannot add values here
+            set.addAll(notes);
             sharedPreferences.edit().putStringSet("notes", set).apply();
+
         }
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
 
         listView.setAdapter(arrayAdapter);
 
-        listView.setOnClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Intent i = new Intent(getApplicationContext(), EditYourNote.class);
                 i.putExtra("noteId", position);
                 startActivity(i);
+
+
             }
+
         });
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listView.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                new AlertDialog().Builder(this)
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                new AlertDialog.Builder(MainActivity.this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Are you sure?")
                         .setMessage("Do you want to delete this note?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 notes.remove(position);
+
+                                SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("com.example.robpercival.notes", Context.MODE_PRIVATE);
+
+                                if (set == null) {
+
+                                    set = new HashSet<String>();
+
+                                } else {
+
+                                    set.clear();
+
+                                }
+
+                                set.addAll(notes);
+                                sharedPreferences.edit().remove("notes").apply();
+                                sharedPreferences.edit().putStringSet("notes", set).apply();
+                                arrayAdapter.notifyDataSetChanged();
+
                             }
                         })
                         .setNegativeButton("No", null)
                         .show();
-                }
+
+                return true;
             }
         });
+
     }
 
     @Override
@@ -95,7 +131,31 @@ public class MainActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.add) {
-            notes.add("");  //User wants to save this info permanently
+
+            notes.add("");
+
+            SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.robpercival.notes", Context.MODE_PRIVATE);
+
+            if (set == null) {
+
+                set = new HashSet<String>();
+
+            } else {
+
+                set.clear();
+
+            }
+
+            set.addAll(notes);
+            arrayAdapter.notifyDataSetChanged();
+
+            sharedPreferences.edit().remove("notes").apply();
+            sharedPreferences.edit().putStringSet("notes", set).apply();
+
+            Intent i = new Intent(getApplicationContext(), EditYourNote.class);
+            i.putExtra("noteId", notes.size() - 1);
+            startActivity(i);
+
 
             return true;
         }
