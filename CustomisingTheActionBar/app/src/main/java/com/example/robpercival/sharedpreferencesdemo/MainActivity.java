@@ -1,9 +1,7 @@
 package com.example.robpercival.sharedpreferencesdemo;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,21 +22,6 @@ public class MainActivity extends Activity {
         String username = sharedPreferences.getString("username", "");
 
         Log.i("username", username);
-
-        //Long line of code
-        new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle("Are you sure?")
-            .setMessage("Do you definitely want to do this?")
-            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Log.i("Button Tapped", "Yes");
-                }
-
-            })
-            .setNegativeButton("No", null)
-            .show();
     }
 
     @Override
@@ -57,6 +40,7 @@ public class MainActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.add) {
+
             Log.i("Action Button Tapped", "Add");
 
             return true;
