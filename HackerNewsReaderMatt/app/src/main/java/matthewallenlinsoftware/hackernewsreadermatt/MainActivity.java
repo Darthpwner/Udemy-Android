@@ -3,6 +3,7 @@ package matthewallenlinsoftware.hackernewsreadermatt;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,13 +27,14 @@ public class MainActivity extends Activity {
     Map<Integer, String> articleTitles = new HashMap<Integer, String>();
     ArrayList<Integer> articleIds = new ArrayList<Integer>();
 
-    SQLiteDatabase articlesDB = this.openOrCreateDatabase("Articles", MODE_PRIVATE, null);
-
+    SQLiteDatabase articlesDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        articlesDB = this.openOrCreateDatabase("Articles", MODE_PRIVATE, null);
 
         articlesDB.execSQL("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY, articleId INTEGER, url VARCHAR, title VARCHAR, content VARCHAR)");
 
@@ -57,7 +59,16 @@ public class MainActivity extends Activity {
                 articleTitles.put(Integer.valueOf(articleId), articleTitle);
                 articleURLs.put(Integer.valueOf(articleId), articleURL);
 
-                articlesDB.execSQL("INSERT INTO articles (articleId, url, title) VALUES (" + articleId + ", '" + articleURL + "', '" + articleTitle + "')");
+                String sql = "\"INSERT INTO articles (articleId, url, title) VALUES (? , ? , ? )";
+
+                SQLiteStatement statement = articlesDB.compileStatement(sql);   //Turn it from String -> SQL statement
+
+                //Don't worry about ? and protects you from SQL injection code
+                statement.bindString(1, articleId);
+                statement.bindString(2, articleURL);
+                statement.bindString(3, articleTitle);
+
+                articlesDB.execSQL();
             }
 
             Cursor c = articlesDB.rawQuery("SELECT * FROM articles", null);
