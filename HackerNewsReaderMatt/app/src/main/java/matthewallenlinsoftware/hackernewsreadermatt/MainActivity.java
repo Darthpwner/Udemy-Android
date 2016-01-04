@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends Activity {
@@ -25,12 +27,20 @@ public class MainActivity extends Activity {
         try {
             String result = task.execute("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty").get();
 
-            Log.i("Result", result);
+            JSONArray jsonArray = new JSONArray(result);
 
+            for (int i = 0; i < 20; i++) {
+                String articleInfo = task.execute("https://hacker-news.firebaseio.com/v0/item/" + jsonArray.getString(i) + ".json?print=pretty").get();
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+                JSONObject jsonObject = new JSONObject(articleInfo);
+
+                String articleTitle = jsonObject.getString("title");
+                String articleURL = jsonObject.getString("url");
+
+                Log.i("articleTitle", articleTitle);
+                Log.i("articleURL", articleURL);
+            }
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
