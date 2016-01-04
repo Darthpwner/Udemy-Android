@@ -1,6 +1,7 @@
 package matthewallenlinsoftware.hackernewsreadermatt;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -9,6 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,21 +33,44 @@ public class MainActivity extends Activity {
     ArrayList<Integer> articleIds = new ArrayList<Integer>();
 
     SQLiteDatabase articlesDB;
+    ArrayList<String> titles = new ArrayList<String>();
+    ArrayAdapter arrayAdapter;
+
+    ArrayList<String> urls = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ListView listView = (ListView) findViewById(R.id.listView);
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), ArticleActivity.class);
+                i.putExtra("articleUrl", urls.get(position));
+                startActivity(i);
+
+                Log.i("articleURL", urls.get(position));
+            }
+        });
+
         articlesDB = this.openOrCreateDatabase("Articles", MODE_PRIVATE, null);
 
         articlesDB.execSQL("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY, articleId INTEGER, url VARCHAR, title VARCHAR, content VARCHAR)");
+
+        updateListView();
 
         DownloadTask task = new DownloadTask();
         try {
             String result = task.execute("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty").get();
 
             JSONArray jsonArray = new JSONArray(result);
+
+            articlesDB.execSQL("DELETE FROM articles"); //Delete everything from articles so we don't have duplicates
 
             for (int i = 0; i < 20; i++) {
                 String articleId = jsonArray.getString(i);
@@ -59,7 +87,7 @@ public class MainActivity extends Activity {
                 articleTitles.put(Integer.valueOf(articleId), articleTitle);
                 articleURLs.put(Integer.valueOf(articleId), articleURL);
 
-                String sql = "\"INSERT INTO articles (articleId, url, title) VALUES (? , ? , ? )";
+                String sql = "INSERT INTO articles (articleId, url, title) VALUES (? , ? , ? )";
 
                 SQLiteStatement statement = articlesDB.compileStatement(sql);   //Turn it from String -> SQL statement
 
@@ -72,7 +100,18 @@ public class MainActivity extends Activity {
                 statement.execute();    //Safer way of doing the comment above
             }
 
-            Cursor c = articlesDB.rawQuery("SELECT * FROM articles", null);
+            updateListView();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateListView() {
+
+        try {
+            //Returns all the articles in order by ID with the biggest ones first
+            Cursor c = articlesDB.rawQuery("SELECT * FROM articles ORDER BY articleId DESC", null);
 
             int articleIdIndex = c.getColumnIndex("articleId");
             int urlIndex = c.getColumnIndex("url");
@@ -80,16 +119,25 @@ public class MainActivity extends Activity {
 
             c.moveToFirst();
 
+            titles.clear(); //Remove items from ArrayList titles
+            urls.clear();   //Removes items from ArrayList urls
+
             while(c != null) {
+                titles.add(c.getString(titleIndex));
+                urls.add(c.getString(urlIndex));
+
                 Log.i("articleId", Integer.toString(c.getInt(articleIdIndex)));
                 Log.i("articleURL", c.getString(urlIndex));
                 Log.i("articleTitle", c.getString(titleIndex));
 
                 c.moveToNext();
             }
-        } catch(Exception e) {
+
+            arrayAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public class DownloadTask extends AsyncTask<String, Void, String> {
