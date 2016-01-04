@@ -24,15 +24,18 @@ public class MainActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    ParseAnalytics.trackAppOpenedInBackground(getIntent());
-
     ParseObject score = new ParseObject("Score"); //We are creating a general class called Score, and we are also creating a particular object of that class called "score"
     //Parse checks to see if the Score class exists and creates it if it doesn't exist
 
     score.put("username", "Matthew"); //Puts variable "username" with value "Matthew"
-    score.put("score", 100);  //Puts variable "score" with value 100
+    score.put("score", 50);  //Puts variable "score" with value 100
 
+    score.put("username", "Christine");
+    score.put("score", 100);
 
+    score.saveInBackground(); //Sends it to the Parse server
+
+    ParseAnalytics.trackAppOpenedInBackground(getIntent()); //This has to be at the end!
   }
 
   @Override
