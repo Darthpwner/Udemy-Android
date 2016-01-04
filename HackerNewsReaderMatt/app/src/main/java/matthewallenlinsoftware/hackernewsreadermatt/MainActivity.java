@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
     ArrayAdapter arrayAdapter;
 
     ArrayList<String> urls = new ArrayList<String>();
+    ArrayList<String> content = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +53,8 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), ArticleActivity.class);
                 i.putExtra("articleUrl", urls.get(position));
+                i.putExtra("content", content.get(position));
                 startActivity(i);
-
-                Log.i("articleURL", urls.get(position));
             }
         });
 
@@ -65,43 +65,9 @@ public class MainActivity extends Activity {
         updateListView();
 
         DownloadTask task = new DownloadTask();
+
         try {
-            String result = task.execute("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty").get();
-
-            JSONArray jsonArray = new JSONArray(result);
-
-            articlesDB.execSQL("DELETE FROM articles"); //Delete everything from articles so we don't have duplicates
-
-            for (int i = 0; i < 20; i++) {
-                String articleId = jsonArray.getString(i);
-
-                DownloadTask getArticle = new DownloadTask();
-                String articleInfo = getArticle.execute("https://hacker-news.firebaseio.com/v0/item/" + articleId + ".json?print=pretty").get();
-
-                JSONObject jsonObject = new JSONObject(articleInfo);
-
-                String articleTitle = jsonObject.getString("title");
-                String articleURL = jsonObject.getString("url");
-
-                articleIds.add(Integer.valueOf(articleId));
-                articleTitles.put(Integer.valueOf(articleId), articleTitle);
-                articleURLs.put(Integer.valueOf(articleId), articleURL);
-
-                String sql = "INSERT INTO articles (articleId, url, title) VALUES (? , ? , ? )";
-
-                SQLiteStatement statement = articlesDB.compileStatement(sql);   //Turn it from String -> SQL statement
-
-                //Don't worry about ? and protects you from SQL injection code
-                statement.bindString(1, articleId);
-                statement.bindString(2, articleURL);
-                statement.bindString(3, articleTitle);
-
-                //articlesDB.execSQL();
-                statement.execute();    //Safer way of doing the comment above
-            }
-
-            updateListView();
-
+                task.execute("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty").get();
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -110,10 +76,12 @@ public class MainActivity extends Activity {
     public void updateListView() {
 
         try {
+            Log.i("UI UPDATED", "DONE");
+
             //Returns all the articles in order by ID with the biggest ones first
             Cursor c = articlesDB.rawQuery("SELECT * FROM articles ORDER BY articleId DESC", null);
 
-            int articleIdIndex = c.getColumnIndex("articleId");
+            int contentIndex = c.getColumnIndex("articleId");
             int urlIndex = c.getColumnIndex("url");
             int titleIndex = c.getColumnIndex("title");
 
@@ -125,10 +93,7 @@ public class MainActivity extends Activity {
             while(c != null) {
                 titles.add(c.getString(titleIndex));
                 urls.add(c.getString(urlIndex));
-
-                Log.i("articleId", Integer.toString(c.getInt(articleIdIndex)));
-                Log.i("articleURL", c.getString(urlIndex));
-                Log.i("articleTitle", c.getString(titleIndex));
+                content.add(c.getString(contentIndex));
 
                 c.moveToNext();
             }
@@ -166,11 +131,81 @@ public class MainActivity extends Activity {
 
                     data = reader.read();
                 }
+                //
+                JSONArray jsonArray = new JSONArray(result);
+
+                articlesDB.execSQL("DELETE FROM articles"); //Delete everything from articles so we don't have duplicates
+
+                for (int i = 0; i < 20; i++) {
+                    String articleId = jsonArray.getString(i);
+
+                    url = new URL("https://hacker-news.firebaseio.com/v0/item/" + articleId + ".json?print=pretty");
+
+                    urlConnection = (HttpURLConnection) url.openConnection();
+
+                    in = urlConnection.getInputStream();
+
+                    reader = new InputStreamReader(in);
+
+                    data = reader.read();
+
+                    String articleContent = "", articleInfo = "";
+
+                    //Should have article info that is processed in the same way as before
+                    while(data != -1) {
+                        char current = (char) data;
+
+                        articleInfo += current;
+
+                        data = reader.read();
+                    }
+
+                    JSONObject jsonObject = new JSONObject(articleInfo);
+
+                    String articleTitle = jsonObject.getString("title");
+                    String articleURL = jsonObject.getString("url");
+
+                    url = new URL(articleURL);
+
+                    urlConnection = (HttpURLConnection) url.openConnection();
+
+                    in = urlConnection.getInputStream();
+
+                    reader = new InputStreamReader(in);
+
+                    data = reader.read();
+
+                    articleIds.add(Integer.valueOf(articleId));
+                    articleTitles.put(Integer.valueOf(articleId), articleTitle);
+                    articleURLs.put(Integer.valueOf(articleId), articleURL);
+
+                    String sql = "INSERT INTO articles (articleId, url, title, content) VALUES (? , ? , ? , ? )";
+
+                    SQLiteStatement statement = articlesDB.compileStatement(sql);   //Turn it from String -> SQL statement
+
+                    //Don't worry about ? and protects you from SQL injection code
+                    statement.bindString(1, articleId);
+                    statement.bindString(2, articleURL);
+                    statement.bindString(3, articleTitle);
+                    statement.bindString(4, articleContent);
+
+                    //articlesDB.execSQL();
+                    statement.execute();    //Safer way of doing the comment above
+                }
+
+                updateListView();
             } catch(Exception e) {
                 e.printStackTrace();
             }
 
             return result;
+        }
+
+        @Override
+        protected  void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            updateListView();
         }
     }
 

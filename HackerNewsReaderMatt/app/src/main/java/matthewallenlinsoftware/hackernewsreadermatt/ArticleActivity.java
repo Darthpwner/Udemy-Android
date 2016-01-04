@@ -24,8 +24,10 @@ public class ArticleActivity extends Activity {
         Intent i = getIntent();
 
         String url = i.getStringExtra("articleUrl");
+        String content = i.getStringExtra("content");
 
-        webView.loadUrl(url);
+        //webView.loadUrl(url);
+        webView.loadData(content, "text/html", "UTF-8");
     }
 
     @Override
