@@ -30,7 +30,10 @@ public class MainActivity extends Activity {
             JSONArray jsonArray = new JSONArray(result);
 
             for (int i = 0; i < 20; i++) {
-                String articleInfo = task.execute("https://hacker-news.firebaseio.com/v0/item/" + jsonArray.getString(i) + ".json?print=pretty").get();
+                String articleId = jsonArray.getString(i);
+
+                DownloadTask getArticle = new DownloadTask();
+                String articleInfo = getArticle.execute("https://hacker-news.firebaseio.com/v0/item/" + articleId + ".json?print=pretty").get();
 
                 JSONObject jsonObject = new JSONObject(articleInfo);
 
