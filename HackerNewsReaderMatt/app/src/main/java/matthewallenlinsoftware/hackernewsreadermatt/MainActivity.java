@@ -3,6 +3,7 @@ package matthewallenlinsoftware.hackernewsreadermatt;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends Activity {
@@ -21,7 +23,15 @@ public class MainActivity extends Activity {
 
         DownloadTask task = new DownloadTask();
         try {
-            AsyncTask<String, Void, String> result = task.execute("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty");
+            String result = task.execute("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty").get();
+
+            Log.i("Result", result);
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
     }
 
