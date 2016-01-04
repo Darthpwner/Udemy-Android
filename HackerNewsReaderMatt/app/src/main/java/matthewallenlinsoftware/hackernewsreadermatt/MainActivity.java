@@ -1,6 +1,8 @@
 package matthewallenlinsoftware.hackernewsreadermatt;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,10 +26,15 @@ public class MainActivity extends Activity {
     Map<Integer, String> articleTitles = new HashMap<Integer, String>();
     ArrayList<Integer> articleIds = new ArrayList<Integer>();
 
+    SQLiteDatabase articlesDB = this.openOrCreateDatabase("Articles", MODE_PRIVATE, null);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        articlesDB.execSQL("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY, articleId INTEGER, url VARCHAR, title VARCHAR, content VARCHAR)");
 
         DownloadTask task = new DownloadTask();
         try {
@@ -49,11 +56,25 @@ public class MainActivity extends Activity {
                 articleIds.add(Integer.valueOf(articleId));
                 articleTitles.put(Integer.valueOf(articleId), articleTitle);
                 articleURLs.put(Integer.valueOf(articleId), articleURL);
+
+                articlesDB.execSQL("INSERT INTO articles (articleId, url, title) VALUES (" + articleId + ", '" + articleURL + "', '" + articleTitle + "')");
             }
 
-            Log.i("articleIds", articleIds.toString());
-            Log.i("articleTitles", articleTitles.toString());
-            Log.i("articleURLs", articleURLs.toString());
+            Cursor c = articlesDB.rawQuery("SELECT * FROM articles", null);
+
+            int articleIdIndex = c.getColumnIndex("articleId");
+            int urlIndex = c.getColumnIndex("url");
+            int titleIndex = c.getColumnIndex("title");
+
+            c.moveToFirst();
+
+            while(c != null) {
+                Log.i("articleId", Integer.toString(c.getInt(articleIdIndex)));
+                Log.i("articleURL", c.getString(urlIndex));
+                Log.i("articleTitle", c.getString(titleIndex));
+
+                c.moveToNext();
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
