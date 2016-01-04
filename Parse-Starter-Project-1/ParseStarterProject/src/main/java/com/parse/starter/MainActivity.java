@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseObject;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,6 +25,14 @@ public class MainActivity extends ActionBarActivity {
     setContentView(R.layout.activity_main);
 
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
+    ParseObject score = new ParseObject("Score"); //We are creating a general class called Score, and we are also creating a particular object of that class called "score"
+    //Parse checks to see if the Score class exists and creates it if it doesn't exist
+
+    score.put("username", "Matthew"); //Puts variable "username" with value "Matthew"
+    score.put("score", 100);  //Puts variable "score" with value 100
+
+
   }
 
   @Override
