@@ -14,9 +14,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends Activity {
+    Map<Integer, String> articleURLs = new HashMap<Integer, String>();
+    Map<Integer, String> articleTitles = new HashMap<Integer, String>();
+    ArrayList<Integer> articleIds = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +46,14 @@ public class MainActivity extends Activity {
                 String articleTitle = jsonObject.getString("title");
                 String articleURL = jsonObject.getString("url");
 
-                Log.i("articleTitle", articleTitle);
-                Log.i("articleURL", articleURL);
+                articleIds.add(Integer.valueOf(articleId));
+                articleTitles.put(Integer.valueOf(articleId), articleTitle);
+                articleURLs.put(Integer.valueOf(articleId), articleURL);
             }
+
+            Log.i("articleIds", articleIds.toString());
+            Log.i("articleTitles", articleTitles.toString());
+            Log.i("articleURLs", articleURLs.toString());
         } catch(Exception e) {
             e.printStackTrace();
         }
