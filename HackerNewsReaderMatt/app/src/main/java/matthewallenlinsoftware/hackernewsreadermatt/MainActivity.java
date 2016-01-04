@@ -68,7 +68,8 @@ public class MainActivity extends Activity {
                 statement.bindString(2, articleURL);
                 statement.bindString(3, articleTitle);
 
-                articlesDB.execSQL();
+                //articlesDB.execSQL();
+                statement.execute();    //Safer way of doing the comment above
             }
 
             Cursor c = articlesDB.rawQuery("SELECT * FROM articles", null);
