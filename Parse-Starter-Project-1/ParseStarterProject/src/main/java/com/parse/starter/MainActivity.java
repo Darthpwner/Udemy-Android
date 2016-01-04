@@ -15,9 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseAnalytics;
-import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 //ActionBarActivity is deprecated
 public class MainActivity extends AppCompatActivity {
@@ -27,29 +25,50 @@ public class MainActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
-      ParseUser user = new ParseUser();
+      ParseUser.logOut();   //Logs the user out
 
-      //Required
-      user.setUsername("Matthew Lin");
-      user.setPassword("myPass");
+      if (ParseUser.getCurrentUser() != null) {
+          Log.i("currentUser", "User logged in");
+      } else {
+          Log.i("currentUser", "Not logged in");
+      }
 
-      //Optional
-      user.setEmail("hello");
+//      ParseUser.logInInBackground("Matthew", "myPass", new LogInCallback() {
+//          @Override
+//          public void done(ParseUser parseUser, ParseException e) {
+//              //parseUser object has been returned
+//              if(parseUser != null) {
+//                  Log.i("logIn", "Successful");
+//              } else {  //Can fail if data is inputted incorrectly OR no Internet
+//                  Log.i("logIn", "Unsuccessful");
+//                  e.printStackTrace();
+//              }
+//          }
+//      });
 
-      user.put("phone number", 911);
-
-      //Verifies if sign up was successful
-      user.signUpInBackground(new SignUpCallback() {
-          @Override
-          public void done(ParseException e) {
-              if(e == null) {
-                  Log.i("signUp", "Successful");
-              } else {
-                  Log.i("signUp", "Failed");
-                  e.printStackTrace();
-              }
-          }
-      });
+//      ParseUser user = new ParseUser();
+//
+//      //Required
+//      user.setUsername("Matthew Lin");
+//      user.setPassword("myPass");
+//
+//      //Optional
+//      user.setEmail("hello");
+//
+//      user.put("phone number", 911);
+//
+//      //Verifies if sign up was successful
+//      user.signUpInBackground(new SignUpCallback() {
+//          @Override
+//          public void done(ParseException e) {
+//              if(e == null) {
+//                  Log.i("signUp", "Successful");
+//              } else {
+//                  Log.i("signUp", "Failed");
+//                  e.printStackTrace();
+//              }
+//          }
+//      });
 
 //      ParseQuery<ParseObject> query = ParseQuery.getQuery("Score");
 //      query.whereEqualTo("username", "Matthew");
