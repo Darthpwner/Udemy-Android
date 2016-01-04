@@ -10,14 +10,14 @@ package com.parse.starter;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.GetCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.SaveCallback;
+import com.parse.ParseQuery;
 
 //ActionBarActivity is deprecated
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
+      /*
       ParseObject score = new ParseObject("Score"); //We are creating a general class called Score, and we are also creating a particular object of that class called "score"
     //Parse checks to see if the Score class exists and creates it if it doesn't exist
 
@@ -48,6 +49,18 @@ public class MainActivity extends AppCompatActivity {
               }
           }
       });   //Tries to save right away but if Internet is not there, it will save it later
+*/
+      ParseQuery<ParseObject> query = ParseQuery.getQuery("Score");
+
+      query.getInBackground("0j5g5c7tda", new GetCallback<ParseObject>() {
+          @Override
+          public void done(ParseObject parseObject, ParseException e) {
+              if(e == null) {
+                  parseObject.put("score", 200);
+                  parseObject.saveInBackground();
+              }
+          }
+      });
 
       ParseAnalytics.trackAppOpenedInBackground(getIntent()); //This has to be at the end!
   }
