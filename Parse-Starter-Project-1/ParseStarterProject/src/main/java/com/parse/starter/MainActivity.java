@@ -15,8 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 //ActionBarActivity is deprecated
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +31,21 @@ public class MainActivity extends AppCompatActivity {
     public void signUpOrLogin(View view) {
         Log.i("AppInfo", String.valueOf(usernameField.getText()));
         Log.i("AppInfo", String.valueOf(passwordField.getText()));
+
+        ParseUser user = new ParseUser();
+        user.setUsername(String.valueOf(usernameField.getText()));
+        user.setPassword(String.valueOf(passwordField.getText()));
+
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null) {
+                    Log.i("AppInfo", "Signup Successful");
+                } else {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
   @Override
