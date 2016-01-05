@@ -20,7 +20,7 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="130dp"
-        android:id="@+id/username"
+        android:id="@+id/instagram"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/instagram_logo" />
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username"
-        android:layout_below="@+id/username"
+        android:layout_below="@+id/instagram"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
@@ -45,5 +45,25 @@
         android:layout_alignRight="@+id/username"
         android:layout_alignEnd="@+id/username"
         android:hint="password" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:id="@+id/signUpButton"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:onClick="signUpOrLogin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:id="@+id/changeSignupMode"
+        android:layout_below="@+id/signUpButton"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ff2a47ff" />
 </RelativeLayout>
 <!-- From: file:/Users/Darthpwner/Desktop/Udemy-Android/Parse-Starter-Project-1/ParseStarterProject/src/main/res/layout/activity_main.xml -->

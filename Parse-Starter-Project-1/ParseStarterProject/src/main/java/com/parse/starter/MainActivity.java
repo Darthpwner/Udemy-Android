@@ -13,25 +13,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 import com.parse.ParseAnalytics;
-import com.parse.ParseUser;
 
 //ActionBarActivity is deprecated
 public class MainActivity extends AppCompatActivity {
+
+    EditText usernameField;
+    EditText passwordField;
+
+    public void signUpOrLogin(View view) {
+        Log.i("AppInfo", String.valueOf(usernameField.getText()));
+        Log.i("AppInfo", String.valueOf(passwordField.getText()));
+    }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
-      ParseUser.logOut();   //Logs the user out
+      usernameField = (EditText) findViewById(R.id.username);
+      passwordField = (EditText) findViewById(R.id.password);
 
-      if (ParseUser.getCurrentUser() != null) {
-          Log.i("currentUser", "User logged in");
-      } else {
-          Log.i("currentUser", "Not logged in");
-      }
+
+//      ParseUser.logOut();   //Logs the user out
+//
+//      if (ParseUser.getCurrentUser() != null) {
+//          Log.i("currentUser", "User logged in");
+//      } else {
+//          Log.i("currentUser", "Not logged in");
+//      }
 
 //      ParseUser.logInInBackground("Matthew", "myPass", new LogInCallback() {
 //          @Override

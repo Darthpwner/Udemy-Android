@@ -54,7 +54,8 @@
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:onClick="signUpOrLogin" />
 
     <TextView
         android:layout_width="wrap_content"
