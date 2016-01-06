@@ -8,6 +8,7 @@
  */
 package com.parse.starter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void done(ParseException e) {
                     if(e == null) {
                         Log.i("AppInfo", "Signup Successful");
+
+                        showUserList();
                     } else {
                         Toast.makeText(getApplicationContext(), e.getMessage().substring(e.getMessage().indexOf(" ")), Toast.LENGTH_LONG).show();
                     }
@@ -99,10 +102,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void showUserList() {
+        Intent i = new Intent(getApplicationContext(), UserList.class);
+        startActivity(i);
+    }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
+
+      if(ParseUser.getCurrentUser() != null) {
+          showUserList();
+      }
 
       signUpModeActive = true;
 
