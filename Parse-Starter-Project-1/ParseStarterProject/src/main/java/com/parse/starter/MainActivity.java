@@ -11,6 +11,7 @@ package com.parse.starter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 //ActionBarActivity is deprecated
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnKeyListener {
 
     EditText usernameField;
     EditText passwordField;
@@ -34,6 +35,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button signUpButton;
 
     Boolean signUpModeActive;
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_ENTER) {
+            signUpOrLogin(v);
+        }
+
+        return false;
+    }
 
     @Override
     public void onClick(View v) {
@@ -94,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       signUpButton = (Button) findViewById(R.id.signUpButton);
 
       changeSignUpModeTextView.setOnClickListener(this);
+
+      usernameField.setOnKeyListener(this);
+      passwordField.setOnKeyListener(this);
 
 //      ParseUser.logOut();   //Logs the user out
 //
@@ -237,4 +250,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     return super.onOptionsItemSelected(item);
   }
+
+
 }
