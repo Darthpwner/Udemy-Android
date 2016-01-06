@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText passwordField;
     TextView changeSignUpModeTextView;
     Button signUpButton;
+    ImageView logo;
+    RelativeLayout relativeLayout;
 
     Boolean signUpModeActive;
 
@@ -102,8 +106,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       passwordField = (EditText) findViewById(R.id.password);
       changeSignUpModeTextView = (TextView) findViewById(R.id.changeSignupMode);
       signUpButton = (Button) findViewById(R.id.signUpButton);
+      logo = (ImageView) findViewById(R.id.logo);
+      relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
 
       changeSignUpModeTextView.setOnClickListener(this);
+      logo.setOnClickListener(this);
+      relativeLayout.setOnClickListener(this);
 
       usernameField.setOnKeyListener(this);
       passwordField.setOnKeyListener(this);

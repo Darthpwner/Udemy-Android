@@ -1572,7 +1572,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
         public static final int info=0x7f0c005f;
-        public static final int instagram=0x7f0c004f;
+        public static final int logo =0x7f0c004f;
         public static final int line1=0x7f0c0059;
         public static final int line3=0x7f0c005d;
         public static final int listMode=0x7f0c0009;
