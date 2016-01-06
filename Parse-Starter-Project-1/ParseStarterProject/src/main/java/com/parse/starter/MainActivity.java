@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,15 +54,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         //We want our textView to be the only thing clicked
         if(v.getId() == R.id.changeSignupMode) {
-            if(signUpModeActive == true) {
+            if (signUpModeActive == true) {
                 signUpModeActive = false;
                 changeSignUpModeTextView.setText("Sign Up");
                 signUpButton.setText("Log In");
+            } else {    //Log in mode
+                signUpModeActive = true;
+                changeSignUpModeTextView.setText("Log In");
+                signUpButton.setText("Sign Up");
             }
-        } else {    //Log in mode
-            signUpModeActive = true;
-            changeSignUpModeTextView.setText("Log In");
-            signUpButton.setText("Sign Up");
+        } else if (v.getId() == R.id.logo || v.getId() == R.id.relativeLayout) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
 
